@@ -2,6 +2,8 @@
 This project was created to practice vanilla javascript.
 Design and other components were created by Traversy Media.
 
+<img src="images/screen.jpg" width="500">
+
 Movie info application built with vanilla JavaScript that uses **version 3** of the [TMDB API](https://developers.themoviedb.org/3)
 
 
