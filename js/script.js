@@ -6,11 +6,14 @@ const global = {
 
 // Fetch data from TMDB API
 const fetchAPIData = async (endpoint) => {
+  showSpinner();
   const response = await fetch(
     `${global.API_URL}${endpoint}?api_key=${global.API_KEY}&language=en-US`
   );
 
   const data = await response.json();
+
+  hideSpinner();
 
   return data;
 };
@@ -49,6 +52,14 @@ const displayPopularMovies = async () => {
     console.log('results', results);
     popMovEl.append(div);
   });
+};
+
+const showSpinner = () => {
+  document.querySelector('.spinner').classList.add('show');
+};
+
+const hideSpinner = () => {
+  document.querySelector('.spinner').classList.remove('show');
 };
 
 const highlightActiveLink = () => {
