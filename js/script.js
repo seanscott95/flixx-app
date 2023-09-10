@@ -21,7 +21,7 @@ const fetchAPIData = async (endpoint) => {
 const displayPopularMovies = async () => {
   const { results } = await fetchAPIData('movie/popular');
 
-  const popMovEl = document.querySelector('#popular-movies');
+  const popMovieEl = document.querySelector('#popular-movies');
 
   results.forEach((movie) => {
     const div = document.createElement('div');
@@ -49,8 +49,44 @@ const displayPopularMovies = async () => {
         </p>
       </div>
     `;
-    console.log('results', results);
-    popMovEl.append(div);
+
+    popMovieEl.append(div);
+  });
+};
+
+const displayPopularShows = async () => {
+  const { results } = await fetchAPIData('tv/popular');
+
+  const popShowEl = document.querySelector('#popular-shows');
+
+  results.forEach((show) => {
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.innerHTML = `
+      <a href='show-details.html?id=${show.id}'>
+        ${
+          show.poster_path
+            ? `<img
+            src='https://image.tmdb.org/t/p/w500${show.poster_path}'
+            class='card-img-top'
+            alt= ${show.name}
+          />`
+            : `<img
+          src='../images'
+          class='card-img-top'
+          alt= ${show.name}
+        />`
+        }
+      </a>
+      <div class='card-body'>
+        <h5 class='card-title'>${show.name}</h5>
+        <p class'card-text'>
+          <small class='text-muted'>Release: ${show.first_aired_date}</small>
+        </p>
+      </div>
+    `;
+
+    popShowEl.append(div);
   });
 };
 
@@ -79,7 +115,7 @@ const init = () => {
       displayPopularMovies();
       break;
     case '/shows.html':
-      console.log('Shows');
+      displayPopularShows();
       break;
     case '/movies.details':
       console.log('Movies html');
